@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect , get_object_or_404
 from .forms import LivreForm
 # Create your views here.
 from .models import Livre
@@ -17,3 +17,15 @@ def ajouter_livre(request):
     else:
         form = LivreForm()
     return render(request, 'catalogue/ajouter.html', {'form': form})
+
+
+def modifier_livre(request, livre_id):
+    livre = get_object_or_404(Livre, id= livre_id)
+    if request.method == 'POST':
+        form = LivreForm(request.POST, instance=livre)
+        if form.is_valid():
+            form.save()
+            return redirect('liste_livres')
+    else:
+        form = LivreForm(instance=livre)
+    return render(request, 'catalogue/modifier.html', {'form': form})

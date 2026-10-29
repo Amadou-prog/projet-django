@@ -12,6 +12,7 @@
         {% for livre in livres %}
         
             <li>{{ livre.titre }} - {{ livre.auteur }}</li>
+            <a href="{% url 'modifier_livre' livre.id %}">Modifier</a>
             
         {% endfor %}
     </ul>
