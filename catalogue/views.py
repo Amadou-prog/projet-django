@@ -29,3 +29,11 @@ def modifier_livre(request, livre_id):
     else:
         form = LivreForm(instance=livre)
     return render(request, 'catalogue/modifier.html', {'form': form})
+
+
+def supprimer_livre(request, livre_id):
+    livre = get_object_or_404(Livre, id=livre_id)
+    if request.method == 'POST':
+        livre.delete()
+        return redirect('liste_livres')
+    return render(request, 'catalogue/supprimer.html', {'livre': livre})
