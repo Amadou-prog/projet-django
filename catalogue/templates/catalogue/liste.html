@@ -13,6 +13,7 @@
         
             <li>{{ livre.titre }} - {{ livre.auteur }}</li>
             <a href="{% url 'modifier_livre' livre.id %}">Modifier</a>
+            <a href="{% url 'supprimer_livre' livre.id %}">Supprimer</a>
             
         {% endfor %}
     </ul>
